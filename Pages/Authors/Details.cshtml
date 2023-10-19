@@ -1,0 +1,71 @@
+﻿@page
+@model BookStore.Pages.Authors.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div>
+    <h4>Author</h4>
+    <hr />
+    <div>
+    <img src="../images/@(Model.Author?.authorName).jpg" alt="Author Image" style="max-width: 250px;" />
+</div>
+<br />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Author.authorName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Author.authorName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Author.About)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Author.About)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Author?.authorID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
+<br />
+<hr />
+<br />
+
+@if (Model.Author!= null)
+{
+    <h2>Books Written By: @Model.Author.authorName</h2>
+
+    //@if (Model.Author != null )
+    //{
+      //  <h3>Author Name</h3>
+        //<p>Title: @Model.Book.bookName</p>
+        
+  //<p><a asp-page="../Authors/Details" asp-route-id="@Model.Author.authorID">@Model.Author.authorName</a></p>
+       
+        <!-- Add more book properties as needed -->
+    //}
+        @if (Model.Author.ProductDetails.Any())
+    {
+        <h3>Books List</h3>
+        @foreach (var book in Model.Author.ProductDetails)
+        {
+            <li><a id= "MTM" asp-page="../Books/Details" asp-route-id="@book.Book.bookID">
+                @book.Book.bookName
+            </a></li>
+        }
+    }
+
+    else
+    {
+        <p>No author found for this book.</p>
+    }
+}
+else
+{
+    <p>Book not found.</p>
+}

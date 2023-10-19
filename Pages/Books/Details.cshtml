@@ -1,0 +1,130 @@
+﻿@page
+@model BookStore.Pages.Books.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>Book Details</h4>
+    <hr />
+<br />
+<div>
+    <img src="../images/@(Model.Book?.bookName).jpg" alt="Book Image" style="max-width: 250px;" />
+</div>
+<br />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.bookName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.bookName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.bookType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.bookType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.publishDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.publishDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.Publisher)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.Publisher)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.Language)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.Language)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.Paperback)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.Paperback)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.ISBN_10)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.ISBN_10)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.ISBN_13)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.ISBN_13)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.Item_Weight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.Item_Weight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.Dimensions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.Dimensions)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.BestSellersRank)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.BestSellersRank)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.CustomerReview)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.CustomerReview)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Book?.bookID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
+<br />
+<hr />
+<br />
+@if (Model.Book!= null)
+{
+    <h2>@Model.Book.bookName</h2>
+
+    //@if (Model.Author != null )
+    //{
+      //  <h3>Author Name</h3>
+        //<p>Title: @Model.Book.bookName</p>
+        
+  //<p><a asp-page="../Authors/Details" asp-route-id="@Model.Author.authorID">@Model.Author.authorName</a></p>
+       
+        <!-- Add more book properties as needed -->
+    //}
+        @if (Model.Book.ProductDetails.Any())
+    {
+        <h3>Authors List</h3>
+        @foreach (var author in Model.Book.ProductDetails)
+        {
+            <li><a id="MTM" asp-page="../Authors/Details" asp-route-id="@author.Author.authorID">
+                @author.Author.authorName
+            </a></li>
+        }
+    }
+
+    else
+    {
+        <p>No author found for this book.</p>
+    }
+}
+else
+{
+    <p>Book not found.</p>
+}
